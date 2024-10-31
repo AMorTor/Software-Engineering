@@ -4,72 +4,82 @@ export default function Signin() {
   const error = useActionData();
 
   return (
-    <main className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-      <section className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h1 className="mt-10 text-center text-3xl md:text-4xl font-bold leading-9 tracking-tight text-gray-900">
+    <main
+      className="flex min-h-screen items-center justify-center"
+      style={{
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1501594907352-04cda38ebc29?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&q=80&w=1080&h=720')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <section
+        className="flex flex-col justify-center p-6 rounded-lg shadow-lg w-full max-w-md"
+        style={{
+          backgroundColor: "rgba(255, 255, 255, 0.9)", // Fondo blanco semitransparente
+          fontFamily: "'Arial', sans-serif", // Cambia la tipografía
+        }}
+      >
+        <h1 className="text-center text-3xl md:text-4xl font-bold leading-9 tracking-tight text-gray-800">
           Inicio de sesión
         </h1>
-      </section>
 
-      <section className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <Form action="/signin" method="POST" className="space-y-6">
+        <Form action="/signin" method="POST" className="space-y-6 mt-6">
           <div>
             <label
-              className="block text-sm font-medium leading-6 text-gray-900 after:content-['*'] after:ml-1 after:text-red-500"
+              className="block text-sm font-medium leading-6 text-gray-700"
               htmlFor="username"
             >
               Usuario
             </label>
-            <div className="mt-2">
-              <input
-                autoComplete="username"
-                className="block w-full rounded-md border-0 px-2.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                id="username"
-                name="username"
-                placeholder="Tu usuario"
-                required
-              />
-            </div>
+            <input
+              autoComplete="username"
+              className="block w-full rounded-md px-3 py-2 mt-1 text-gray-900 shadow-sm ring-1 ring-gray-300 focus:ring-2 focus:ring-indigo-500"
+              id="username"
+              name="username"
+              placeholder="Tu usuario"
+              required
+              style={{ fontFamily: "'Arial', sans-serif" }}
+            />
           </div>
 
           <div>
-            <div className="flex items-center justify-between">
-              <label
-                className="block text-sm font-medium leading-6 text-gray-900 after:content-['*'] after:ml-1 after:text-red-500"
-                htmlFor="password"
-              >
-                Contraseña
-              </label>
-            </div>
-            <div className="mt-2">
-              <input
-                autoComplete="current-password"
-                className="block w-full rounded-md border-0 px-2.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                id="password"
-                name="password"
-                placeholder="Tu contraseña"
-                required
-                type="password"
-              />
-            </div>
-          </div>
-
-          {error && <div className="text-red-500 text-sm">{error}</div>}
-
-          <div>
-            <button
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              type="submit"
+            <label
+              className="block text-sm font-medium leading-6 text-gray-700"
+              htmlFor="password"
             >
-              Iniciar sesión
-            </button>
+              Contraseña
+            </label>
+            <input
+              autoComplete="current-password"
+              className="block w-full rounded-md px-3 py-2 mt-1 text-gray-900 shadow-sm ring-1 ring-gray-300 focus:ring-2 focus:ring-indigo-500"
+              id="password"
+              name="password"
+              placeholder="Tu contraseña"
+              required
+              type="password"
+              style={{ fontFamily: "'Arial', sans-serif" }}
+            />
           </div>
+
+          {error && (
+            <div className="text-red-500 text-sm" style={{ fontFamily: "'Arial', sans-serif" }}>
+              {error}
+            </div>
+          )}
+
+          <button
+            className="w-full rounded-md bg-indigo-600 px-3 py-2 text-white font-semibold hover:bg-indigo-500 focus:ring-2 focus:ring-indigo-500"
+            type="submit"
+          >
+            Iniciar sesión
+          </button>
         </Form>
 
-        <p className="mt-10 text-center text-sm text-gray-500">
+        <p className="mt-6 text-center text-sm text-gray-600">
           ¿No tienes una cuenta?{" "}
           <a
-            className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+            className="text-indigo-600 hover:text-indigo-500 font-semibold"
             href="/signup"
           >
             Crea una cuenta
