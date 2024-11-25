@@ -4,14 +4,14 @@ import { AuthenticatedGuard } from './core/guards/authenticated/authenticated.gu
 
 export const routes: Routes = [
   {
-    path: "landing",
-    title: "Landing Page",
-    loadComponent: () => import("./landing/landing.component"),
+    path: "dashboard",
+    title: "Dashboard Page",
+    loadComponent: () => import("./dashboard/dashboard.component"),
     canActivate: [AuthGuard],
     children: [
-      { path: "home", title: "Home", loadComponent: () => import("./landing/pages/home/home.component") },
-      { path: 'users', title: 'Users', loadComponent: () => import('./landing/pages/users/users.component') },
-      { path: 'users/:id', title: 'User', loadComponent: () => import('./landing/pages/user/user.component') },
+      { path: "home", title: "Home", loadComponent: () => import("./dashboard/pages/home/home.component") },
+      { path: 'users', title: 'Users', loadComponent: () => import('./dashboard/pages/users/users.component') },
+      { path: 'users/:id', title: 'User', loadComponent: () => import('./dashboard/pages/user/user.component') },
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]
   },
