@@ -1,0 +1,35 @@
+import { Routes } from '@angular/router';
+import { AuthGuard } from './core/guards/auth/auth.guard';
+import { AuthenticatedGuard } from './core/guards/authenticated/authenticated.guard';
+
+export const routes: Routes = [
+  {
+    path: "landing",
+    title: "Landing Page",
+    loadComponent: () => import("./landing/landing.component"),
+    canActivate: [AuthGuard],
+    children: [
+      { path: "home", title: "Home", loadComponent: () => import("./landing/pages/home/home.component") },
+      { path: 'users', title: 'Users', loadComponent: () => import('./landing/pages/users/users.component') },
+      { path: 'users/:id', title: 'User', loadComponent: () => import('./landing/pages/user/user.component') },
+      { path: '', redirectTo: 'home', pathMatch: 'full' }
+    ]
+  },
+  {
+    path: "signin",
+    title: "Sign In",
+    canActivate: [AuthenticatedGuard],
+    loadComponent: () => import("./auth/signin/signin.component"),
+  },
+  {
+    path: "signup",
+    title: "Sign Up",
+    loadComponent: () => import("./auth/signup/signup.component"),
+  },
+  {
+    path: "",
+    redirectTo: "signin",
+    pathMatch: "full",
+
+  }
+];
