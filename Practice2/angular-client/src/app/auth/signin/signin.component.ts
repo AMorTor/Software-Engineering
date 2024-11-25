@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../core/services/auth.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { AuthService } from '../../core/services/auth/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -13,7 +13,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export default class SigninComponent implements OnInit {
   public signinForm!: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) { }
+  constructor(private authService: AuthService, private router: Router, @Inject(FormBuilder) private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.signinForm = this.fb.group({
@@ -32,7 +32,7 @@ export default class SigninComponent implements OnInit {
     const { username, password } = this.signinForm.value;
     this.authService.signIn(username, password).subscribe({
       next: () => {
-        this.router.navigate(['/landing/home']);
+        this.router.navigate(['/dashboard/home']);
       },
       error: (error) => {
         console.error("Login failed", error);
