@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, tap, switchMap } from 'rxjs';
 
 import { User } from '../../../interfaces/user.interface';
 import { JwtDecoderService } from '../jwt/jwt-decoder.service';
 import { RequestServerService } from '../server/request-server.service';
+import { Auth, authState, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from '@angular/fire/auth';
+import { GoogleUser } from '../../../interfaces/googleUser.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +18,43 @@ export class AuthService {
   public defaultRole: string = 'USER';
   public currentUser: User | null = null; // Propiedad para almacenar el usuario actual
 
+  public auth: Auth = inject(Auth);
+  readonly authState$ = authState(this.auth);
+
   constructor(
     private httpClient: HttpClient,
     private router: Router,
     private jwtDecoder: JwtDecoderService, // Inyecta el servicio JwtDecoderService
     private requestServerService: RequestServerService // Inyecta el servicio RequestServerService
   ) { }
+  // google auth methods
+  public getAuth() {
+    return this.auth;
+  }
 
+  public logIn(user: GoogleUser) {
+    signInWithEmailAndPassword(this.getAuth(), user.email, user.password);
+  }
+
+  public register(user: GoogleUser) {
+    return createUserWithEmailAndPassword(this.getAuth(), user.email, user.password);
+  }
+
+  public signInWithGoogle() {
+    return signInWithPopup(this.auth, new GoogleAuthProvider())
+  }
+
+  public signOutGoogle() {
+    return signOut(this.auth);
+  }
+
+  isAuthenticatedGoogle(): boolean {
+    const user = this.getAuth().currentUser;
+    return user !== null;
+  }
+
+
+  // API SpringBoot methods
   public signIn(username: string, password: string): Observable<any> {
     return this.httpClient.post<any>(this.lOGIN_URL + "auth/login", { username, password })
       .pipe(

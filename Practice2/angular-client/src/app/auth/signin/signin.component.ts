@@ -39,4 +39,10 @@ export default class SigninComponent implements OnInit {
       }
     })
   }
+
+  signInWithGoogle() {
+    this.authService.signInWithGoogle().then(response => {
+      this.router.navigate(['/dashboard/home']);
+    })
+  }
 }
