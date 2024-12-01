@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../core/services/auth.service';
+import { AuthService } from '../../core/services/auth/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export default class SignupComponent implements OnInit {
   signupForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) { }
+  constructor(@Inject(FormBuilder) private fb: FormBuilder, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.signupForm = this.fb.group({
@@ -35,7 +35,7 @@ export default class SignupComponent implements OnInit {
     const { username, lastname, email, password } = this.signupForm.value;
     this.auth.signUp(username, lastname, email, password).subscribe({
       next: () => {
-        this.router.navigate(['/landing/home']);
+        this.router.navigate(['/dashboard/home']);
       },
       error: (error) => {
         console.error("Signup failed", error);
