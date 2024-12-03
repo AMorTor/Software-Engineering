@@ -12,6 +12,8 @@ import { newUserAction } from "./NewUser/NewUser.handlers.js";
 import Layout from "../components/Layout/index.js";
 import { layoutLoader } from "../components/Layout/Layout.handlers.js";
 import ErrorBoundary from "../components/Layout/LayoutErrorBoundary.jsx";
+import Libros from "./Libros/libros.jsx"; 
+import Ram from "./Ram/ram.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +50,14 @@ export const router = createBrowserRouter([
         loader: userLoader,
         action: userAction,
       },
+      {
+        path: "libros",  
+        element: <Libros />,
+      },
+      {
+        path:"ram",
+        element: <Ram />
+      }
     ],
   },
 ]);
