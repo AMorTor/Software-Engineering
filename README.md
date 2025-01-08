@@ -34,3 +34,14 @@ Se realizaron pruebas exhaustivas de los mecanismos de autenticación implementa
 - **Estado**: ✅ PASSED
 - **Evidencia**:
 ![image](https://github.com/user-attachments/assets/909bc33a-b497-4aa3-80bd-a7323f0e3f6b)
+
+
+#### Test Case AUTH-03: Acceso sin Token
+- **Descripción**: Intento de acceso a recurso protegido sin token
+- **Datos de Entrada**: Petición sin header Authorization
+- **Resultado Esperado**: Error 401 Unauthorized
+- **Estado**: ✅ PASSED
+- **Evidencia**:
+![image](https://github.com/user-attachments/assets/6651fba9-9c58-4343-9bf3-955de4ebe740)
+
+*Última actualización: 8 de enero, 2025*
