@@ -30,6 +30,14 @@ Se realizaron pruebas exhaustivas de los mecanismos de autenticación implementa
 - **Evidencia**:
 ![image](https://github.com/user-attachments/assets/909bc33a-b497-4aa3-80bd-a7323f0e3f6b)
 
+#### Test Case AUTH-03: Acceso sin Token
+- **Descripción**: Intento de acceso a recurso protegido sin token
+- **Datos de Entrada**: Petición sin header Authorization
+- **Resultado Esperado**: Error 401 Unauthorized
+- **Estado**: ✅ PASSED
+- **Evidencia**:
+![image](https://github.com/user-attachments/assets/ac0bb528-b28f-4134-96ad-594526d30f43)
+
 # Pruebas de API de Libros
 
 ## Descripción General
